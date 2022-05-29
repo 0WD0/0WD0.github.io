@@ -71,47 +71,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-CF869D" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/05/30/CF869D/" class="article-date">
-  <time class="dt-published" datetime="2022-05-29T16:12:37.440Z" itemprop="datePublished">2022-05-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>[[dfs]] [[trees_and_similar]]<br><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/869/D">link</a></p>
-<p>At first, I felt confused about the description.</p>
-<p>calculate the number of simple paths in a completed binary tree with a few extra edges? n&lt;1e9!?</p>
-<p>O(n) is unacceptable.</p>
-<p>Then, I tried to compress the nodes. But after I compressed them, I have way to calculate the number of simple paths.</p>
-<p>I’ve read the tutorial.</p>
-<h2 id="How-to-compress-a-tree-with-only-a-few-extra-edges"><a href="#How-to-compress-a-tree-with-only-a-few-extra-edges" class="headerlink" title="How to compress a tree with only a few extra edges?"></a>How to compress a tree with only a few extra edges?</h2><p>With one extra edge? 基环树。</p>
-<p>What about more edge? 多环树？Name isn’t important.</p>
-<p>Find out the graph consisting of cycles.</p>
-<p>Every node can represent the tree below it, so the small tree is able to be compressed to the root.</p>
-<hr>
-
-<p>At last, calculate the number of simple paths is a simple dfs problem.</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">500</span>,M=<span class="number">2000</span>,mod=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"><span class="type">int</span> n,m,h[N],nxt[M],to[M],t,a,b;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">	nxt[++t]=h[u],h[u]=t,to[t]=v;</span><br><span class="line">	nxt[++t]=h[v],h[v]=t,to[t]=u;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> it;</span><br><span class="line">map&lt;<span class="type">int</span>,<span class="type">int</span>&gt;I;</span><br><span class="line"><span class="type">int</span> vis[N];</span><br><span class="line">[[define]] pb push_back</span><br><span class="line"><span class="type">int</span> d,rem;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">cal</span><span class="params">(<span class="type">int</span> u)</span></span>&#123;</span><br><span class="line">	<span class="type">int</span> l,r,_=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(it=u;it;_++,it&gt;&gt;=<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(it=u;(it&lt;&lt;<span class="number">1</span>|<span class="number">1</span>)&lt;=n;it=it&lt;&lt;<span class="number">1</span>|<span class="number">1</span>);r=it;</span><br><span class="line">	<span class="keyword">for</span>(it=u;(it&lt;&lt;<span class="number">1</span>)&lt;=n;it=it&lt;&lt;<span class="number">1</span>);l=it;</span><br><span class="line">	<span class="keyword">if</span>(r&gt;n-rem)<span class="keyword">return</span> (<span class="number">1</span>&lt;&lt;d-_+<span class="number">1</span>)<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(l&lt;=n-rem)<span class="built_in">return</span> (<span class="number">1</span>&lt;&lt;d-_)<span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">return</span> (<span class="number">1</span>&lt;&lt;d-_)+n-l;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> num[N];</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> tot,ans;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u)</span></span>&#123;</span><br><span class="line">	vis[u]=<span class="number">1</span>;tot+=num[u];</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> e=h[u],v;e;e=nxt[e])</span><br><span class="line">		<span class="keyword">if</span>(!vis[v=to[e]])<span class="built_in">dfs</span>(v);</span><br><span class="line">	vis[u]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> x[<span class="number">5</span>],y[<span class="number">5</span>],u,v;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">id</span><span class="params">(<span class="type">int</span> num)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!I[num])I[num]=I.<span class="built_in">size</span>();</span><br><span class="line">	<span class="keyword">return</span> I[num];</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> fa;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;m);</span><br><span class="line">	<span class="keyword">if</span>(m==<span class="number">0</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,<span class="number">1ll</span>*n*n%mod);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(it=n;it;it&gt;&gt;=<span class="number">1</span>)d++;</span><br><span class="line">	rem=n-(<span class="number">1</span>&lt;&lt;d<span class="number">-1</span>)+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;m;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;x[i],&amp;y[i]);</span><br><span class="line">		<span class="keyword">for</span>(it=x[i];it;it&gt;&gt;=<span class="number">1</span>)<span class="built_in">id</span>(it);</span><br><span class="line">		<span class="keyword">for</span>(it=y[i];it;it&gt;&gt;=<span class="number">1</span>)<span class="built_in">id</span>(it);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> p:I)<span class="keyword">if</span>(p.first!=<span class="number">1</span>)<span class="built_in">add</span>(p.second,I[p.first&gt;&gt;<span class="number">1</span>]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> p:I)num[p.second]=<span class="built_in">cal</span>(p.first);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> p:I)&#123;</span><br><span class="line">		fa=I[p.first&gt;&gt;<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> e=h[u=p.second];e;e=nxt[e])</span><br><span class="line">			<span class="keyword">if</span>(!vis[v=to[e]]&amp;&amp;v!=fa)</span><br><span class="line">				num[u]-=num[v],vis[v]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span> vis);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;m;i++)<span class="built_in">add</span>(I[x[i]],I[y[i]]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">auto</span> p:I)&#123;</span><br><span class="line">		tot=<span class="number">0</span>;<span class="built_in">dfs</span>(p.second);</span><br><span class="line">		ans=(ans+tot*num[p.second]%mod)%mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF869D/" data-id="cl3ri3l39000l1cw25t1jb3cr" data-title="" class="article-share-link">Share</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-CF862D" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/05/30/CF862D/" class="article-date">
@@ -140,7 +99,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF862D/" data-id="cl3ri3l38000k1cw271yx7kpj" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/05/30/CF862D/" data-id="cl3ri5z41000js0w2gl4gd42u" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -175,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF814D/" data-id="cl3ri3l37000j1cw26z7y6r0x" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/05/30/CF814D/" data-id="cl3ri5z42000ks0w20zop2yek" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -211,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF814C/" data-id="cl3ri3l36000i1cw2ham4ankk" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/05/30/CF814C/" data-id="cl3ri5z41000is0w27qua5k4b" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -246,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF811D/" data-id="cl3ri3l35000g1cw21cbe0ydr" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/05/30/CF811D/" data-id="cl3ri5z40000hs0w29a7v29er" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -288,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF776D/" data-id="cl3ri3l36000h1cw2hzqmhgwn" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/05/30/CF776D/" data-id="cl3ri5z3z000gs0w25pt30l9x" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -323,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF761C/" data-id="cl3ri3l34000f1cw26l8qaymw" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/05/30/CF761C/" data-id="cl3ri5z3y000fs0w2egts9u74" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -389,7 +348,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF711E/" data-id="cl3ri3l34000e1cw2125g9o5l" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/05/30/CF711E/" data-id="cl3ri5z3y000es0w22nn1g1jd" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -430,7 +389,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF596E/" data-id="cl3ri3l33000d1cw22r5yfx3p" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/05/30/CF596E/" data-id="cl3ri5z3w000cs0w2221ocwh8" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -470,7 +429,46 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/05/30/CF385E/" data-id="cl3ri3l32000c1cw26kjr9daf" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/05/30/CF385E/" data-id="cl3ri5z3v000bs0w283gg0e4l" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CF372D" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/30/CF372D/" class="article-date">
+  <time class="dt-published" datetime="2022-05-29T16:12:37.411Z" itemprop="datePublished">2022-05-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[[two_pointers]] [[LCA]] [[dfs_order]] [[map]] [[subtree]]<br><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1662/D">This problem</a> took me three nights.</p>
+<p>Calculate the longest length of interval of indices of nodes in a subtree whose size is less than k.</p>
+<h2 id="Sol"><a href="#Sol" class="headerlink" title="Sol"></a>Sol</h2><p> Binary search, search the answer? every check at most cost $O(n\log n)$, and all in $O(n\log^2n)$ .</p>
+<p>No, there is simpler solution.</p>
+<p>Use two pointers (尺取法 in Chinese).</p>
+<p>Then consider how to add and delete an index.</p>
+<p>What we need to know is how to calculate the distance from a node to a subtree.(the part of function <code>Cnt</code>)</p>
+<p>It’s so hard so I thought so long, and got nothing.</p>
+<p><img src="C:_WD_\Tutorial\Attachment\1.jpg" alt="1"></p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">100005</span>,M=<span class="number">200005</span>;</span><br><span class="line"><span class="type">int</span> k,n,a,b;</span><br><span class="line"><span class="type">int</span> t,h[N],nxt[M],to[M];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v)</span></span>&#123;</span><br><span class="line">	nxt[++t]=h[u],h[u]=t,to[t]=v;</span><br><span class="line">	nxt[++t]=h[v],h[v]=t,to[t]=u;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> cnt,dfn[N],dep[N];</span><br><span class="line"><span class="type">int</span> f[N][<span class="number">20</span>];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dfs</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> fa)</span></span>&#123;</span><br><span class="line">	dfn[u]=++cnt;f[u][<span class="number">0</span>]=fa;dep[u]=dep[fa]+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">19</span>;i++)f[u][i]=f[f[u][i<span class="number">-1</span>]][i<span class="number">-1</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> e=h[u];e;e=nxt[e])<span class="keyword">if</span>(to[e]!=fa)<span class="built_in">dfs</span>(to[e],u);</span><br><span class="line">&#125;</span><br><span class="line">map&lt;<span class="type">int</span>,<span class="type">int</span>&gt;ord;</span><br><span class="line">map&lt;<span class="type">int</span>,<span class="type">int</span>&gt;::iterator it;</span><br><span class="line"><span class="type">int</span> sz,ans,dx,dy;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">dis</span><span class="params">(<span class="type">int</span> x,<span class="type">int</span> y)</span></span>&#123;</span><br><span class="line">	dx=dep[x],dy=dep[y];</span><br><span class="line">	<span class="keyword">if</span>(dep[x]&lt;dep[y])<span class="built_in">swap</span>(x,y);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">19</span>;i&gt;=<span class="number">0</span>;i--)<span class="keyword">if</span>(dep[f[x][i]]&gt;=dep[y])x=f[x][i];</span><br><span class="line">	<span class="keyword">if</span>(x==y)<span class="keyword">return</span> dx+dy<span class="number">-2</span>*dep[x];</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">19</span>;i&gt;=<span class="number">0</span>;i--)<span class="keyword">if</span>(f[x][i]!=f[y][i])x=f[x][i],y=f[y][i];</span><br><span class="line">	<span class="keyword">return</span> dx+dy<span class="number">-2</span>*(dep[x]<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> x,y;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">Cnt</span><span class="params">(<span class="type">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(ord.<span class="built_in">size</span>()==<span class="number">1</span>)<span class="keyword">return</span> <span class="built_in">dis</span>(p,ord.<span class="built_in">begin</span>()-&gt;second);</span><br><span class="line">	it=ord.<span class="built_in">upper_bound</span>(dfn[p]);</span><br><span class="line">	<span class="keyword">if</span>(it==ord.<span class="built_in">end</span>()||it==ord.<span class="built_in">begin</span>())&#123;</span><br><span class="line">		x=ord.<span class="built_in">begin</span>()-&gt;second;</span><br><span class="line">		y=ord.<span class="built_in">rbegin</span>()-&gt;second;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		x=it-&gt;second;it--;</span><br><span class="line">		y=it-&gt;second;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> (<span class="built_in">dis</span>(p,x)+<span class="built_in">dis</span>(p,y)-<span class="built_in">dis</span>(x,y))/<span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Add</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">	sz+=<span class="built_in">Cnt</span>(x);</span><br><span class="line">	ord[dfn[x]]=x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Del</span><span class="params">(<span class="type">int</span> x)</span></span>&#123;</span><br><span class="line">	ord.<span class="built_in">erase</span>(dfn[x]);</span><br><span class="line">	sz-=<span class="built_in">Cnt</span>(x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> l,r;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;n,&amp;k);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;n;i++)<span class="built_in">scanf</span>(<span class="string">&quot;%d%d&quot;</span>,&amp;a,&amp;b),<span class="built_in">add</span>(a,b);</span><br><span class="line">	<span class="built_in">dfs</span>(<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span>(ord[dfn[<span class="number">1</span>]]=sz=l=ans=<span class="number">1</span>,r=<span class="number">2</span>;r&lt;=n;r++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="built_in">Add</span>(r);sz&gt;k;<span class="built_in">Del</span>(l++));</span><br><span class="line">		ans=<span class="built_in">max</span>(ans,r-l+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/30/CF372D/" data-id="cl3ri5z3s0009s0w2hfw2ddog" data-title="" class="article-share-link">Share</a>
       
       
       
@@ -518,10 +516,6 @@
       <ul>
         
           <li>
-            <a href="/2022/05/30/%E6%9C%AA%E5%91%BD%E5%90%8D/">(no title)</a>
-          </li>
-        
-          <li>
             <a href="/2022/05/30/P5121/">(no title)</a>
           </li>
         
@@ -535,6 +529,10 @@
         
           <li>
             <a href="/2022/05/30/CF1662I/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/30/CF1662D/">(no title)</a>
           </li>
         
       </ul>

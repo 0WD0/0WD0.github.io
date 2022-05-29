@@ -1,5 +1,4 @@
 http://example.com/2022/05/29/hello-world/
-http://example.com/2022/05/30/%E6%9C%AA%E5%91%BD%E5%90%8D/
 http://example.com/2022/05/30/CF385E/
 http://example.com/2022/05/30/CF761C/
 http://example.com/2022/05/30/CF367E/
