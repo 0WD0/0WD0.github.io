@@ -16,12 +16,12 @@
   <meta name="author" content="_WD_">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[[interactive]] [[divide_and_conquer]]link We are allowed to query 15 times, and n&lt;1000.Obviously, use &#x3D;&#x3D;divide and conquer&#x3D;&#x3D; algorithm. A small conclusionMake $h(1,n)$ represen">
+    <meta name="description" content="[[interactive]] [[divide_and_conquer]] link We are allowed to query 15 times, and n&lt;1000. Obviously, use &#x3D;&#x3D;divide and conquer&#x3D;&#x3D; algorithm. A small conclusion Make \(h(1,n)\) represent the Hammin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CF862D">
 <meta property="og:url" content="http://example.com/2022/05/30/CF862D/index.html">
 <meta property="og:site_name" content="_WD_&#39;s blog">
-<meta property="og:description" content="[[interactive]] [[divide_and_conquer]]link We are allowed to query 15 times, and n&lt;1000.Obviously, use &#x3D;&#x3D;divide and conquer&#x3D;&#x3D; algorithm. A small conclusionMake $h(1,n)$ represen">
+<meta property="og:description" content="[[interactive]] [[divide_and_conquer]] link We are allowed to query 15 times, and n&lt;1000. Obviously, use &#x3D;&#x3D;divide and conquer&#x3D;&#x3D; algorithm. A small conclusion Make \(h(1,n)\) represent the Hammin">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-29T16:12:37.437Z">
 <meta property="article:modified_time" content="2022-05-29T17:31:17.007Z">
@@ -217,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          1.9k words
         
       </span>
     
@@ -270,18 +270,29 @@
             
             <div class="markdown-body">
               
-              <p>[[interactive]] [[divide_and_conquer]]<br><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/862/D">link</a></p>
-<p>We are allowed to query 15 times, and n&lt;1000.<br>Obviously, use &#x3D;&#x3D;divide and conquer&#x3D;&#x3D; algorithm.</p>
-<h3 id="A-small-conclusion"><a href="#A-small-conclusion" class="headerlink" title="A small conclusion"></a>A small conclusion</h3><p>Make $h(1,n)$ represent the Hamming distance from 1 to n.</p>
+              <p>[[interactive]] [[divide_and_conquer]] <a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/862/D">link</a></p>
+<p>We are allowed to query 15 times, and n&lt;1000. Obviously, use ==divide and conquer== algorithm.</p>
+<h3 id="a-small-conclusion">A small conclusion</h3>
+<p>Make <span class="math inline">\(h(1,n)\)</span> represent the Hamming distance from 1 to n.</p>
 <p>x is the number before altering, y is after.</p>
-<p>We change 0&#x2F;1 within the range of 1~mid.<br>$$<br>\begin{cases}<br>&amp;x&#x3D;h(1,n)&#x3D;h(1,m)+h(m+1,r)\<br>&amp;y&#x3D;h’(1,m)+h(m+1,r)&#x3D;(m-l+1-h(1,m))+h(m+1,r)\<br>\end{cases}<br>\<br>\iff<br>\<br>\begin{cases}<br>&amp;h(l,m)&#x3D;(x-y-(m-l+1))&#x2F;2\<br>&amp;h(m+1,r)&#x3D;(x+y+(m-l+1))&#x2F;2<br>\end{cases}<br>$$</p>
+<p>We change 0/1 within the range of 1~mid. <span class="math display">\[
+\begin{cases}
+&amp;x=h(1,n)=h(1,m)+h(m+1,r)\\
+&amp;y=h&#39;(1,m)+h(m+1,r)=(m-l+1-h(1,m))+h(m+1,r)\\
+\end{cases}
+\\
+\iff
+\\
+\begin{cases}
+&amp;h(l,m)=(x-y-(m-l+1))/2\\
+&amp;h(m+1,r)=(x+y+(m-l+1))/2
+\end{cases}
+\]</span></p>
 <hr>
-
-<p>Then, we can use $h1[2]$, $h2[2]$ to represent the number of number 0 or 1 in two sides.</p>
+<p>Then, we can use <span class="math inline">\(h1[2]\)</span>, <span class="math inline">\(h2[2]\)</span> to represent the number of number 0 or 1 in two sides.</p>
 <p>If one side is full of 1 or full of 0. The next goal is to find the another number in the other side.</p>
 <p>If both sides have 1 and 0, choose either side to continue to divide and conquer.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> n,o[<span class="hljs-number">1003</span>],h1[<span class="hljs-number">2</span>],h2[<span class="hljs-number">2</span>],x[<span class="hljs-number">2</span>],y,h;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;? &quot;</span>);<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d&quot;</span>,o[i]);<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>	<span class="hljs-built_in">fflush</span>(stdout);<br>&#125;<br><span class="hljs-type">int</span> ans[<span class="hljs-number">2</span>];<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">end</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;! %d %d&quot;</span>,ans[<span class="hljs-number">0</span>],ans[<span class="hljs-number">1</span>]);<br>	<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">to1</span><span class="hljs-params">(<span class="hljs-type">int</span> f)</span></span>&#123;<br>	x[<span class="hljs-number">0</span>]=h1[<span class="hljs-number">0</span>],x[<span class="hljs-number">1</span>]=h1[<span class="hljs-number">1</span>];<br>	h+=h2[f];<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">to2</span><span class="hljs-params">(<span class="hljs-type">int</span> f)</span></span>&#123;<br>	x[<span class="hljs-number">0</span>]=h2[<span class="hljs-number">0</span>],x[<span class="hljs-number">1</span>]=h2[<span class="hljs-number">1</span>];<br>	h+=h1[f^<span class="hljs-number">1</span>];<br>&#125;<br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dc</span><span class="hljs-params">(<span class="hljs-type">int</span> l,<span class="hljs-type">int</span> r,<span class="hljs-type">int</span> f)</span></span>&#123;<br>	<span class="hljs-type">int</span> m=l+r&gt;&gt;<span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=l;i&lt;=m;i++)o[i]=f;<br>	<span class="hljs-built_in">print</span>();<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;y);<br>	y-=h;<br>	h1[f]=(x[f]-y+(m-l+<span class="hljs-number">1</span>))/<span class="hljs-number">2</span>;<span class="hljs-comment">//the number of f</span><br>	h1[f^<span class="hljs-number">1</span>]=m-l+<span class="hljs-number">1</span>-h1[f];<br>	h2[f]=(x[f]+y-(m-l+<span class="hljs-number">1</span>))/<span class="hljs-number">2</span>;<br>	h2[f^<span class="hljs-number">1</span>]=r-m-h2[f];<br>	<span class="hljs-keyword">if</span>(!ans[<span class="hljs-number">0</span>]&amp;&amp;!ans[<span class="hljs-number">1</span>])&#123;<br>		<span class="hljs-keyword">if</span>(h1[f]==m-l+<span class="hljs-number">1</span>||h1[f]==<span class="hljs-number">0</span>)&#123;<br>			<span class="hljs-keyword">if</span>(h1[f]==m-l+<span class="hljs-number">1</span>)ans[f]=l;<br>			<span class="hljs-keyword">if</span>(h1[f]==<span class="hljs-number">0</span>)ans[f^<span class="hljs-number">1</span>]=l;<br>			<span class="hljs-built_in">to2</span>(f);<span class="hljs-built_in">dc</span>(m+<span class="hljs-number">1</span>,r,f);<br>		&#125;<br>		<span class="hljs-keyword">else</span>&#123;<br>			<span class="hljs-keyword">if</span>(h2[f]==r-m)ans[f]=r;<br>			<span class="hljs-keyword">if</span>(h2[f]==<span class="hljs-number">0</span>)ans[f^<span class="hljs-number">1</span>]=r;<br>			<span class="hljs-built_in">to1</span>(f);<span class="hljs-built_in">dc</span>(l,m,f^<span class="hljs-number">1</span>);<br>		&#125;<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;=<span class="hljs-number">1</span>;i++)<span class="hljs-keyword">if</span>(!ans[i])&#123;<br>		<span class="hljs-keyword">if</span>(h1[i]==m-l+<span class="hljs-number">1</span>)ans[i]=l,<span class="hljs-built_in">end</span>();<br>		<span class="hljs-keyword">if</span>(h2[i]==r-m)ans[i]=r,<span class="hljs-built_in">end</span>();<br>		<span class="hljs-keyword">if</span>(!h1[i])<span class="hljs-built_in">to2</span>(f),<span class="hljs-built_in">dc</span>(m+<span class="hljs-number">1</span>,r,f);<br>		<span class="hljs-keyword">else</span> <span class="hljs-built_in">to1</span>(f),<span class="hljs-built_in">dc</span>(l,m,f^<span class="hljs-number">1</span>);<br>		<span class="hljs-keyword">return</span>;<br>	&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n);<br>	<span class="hljs-built_in">print</span>();<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;x[<span class="hljs-number">1</span>]);x[<span class="hljs-number">0</span>]=n-x[<span class="hljs-number">1</span>];<br>	<span class="hljs-built_in">dc</span>(<span class="hljs-number">1</span>,n,<span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
-
 
               
             </div>

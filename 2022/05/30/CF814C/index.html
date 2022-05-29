@@ -16,12 +16,12 @@
   <meta name="author" content="_WD_">
   <meta name="keywords" content="">
   
-    <meta name="description" content="[[DP]]link How stupid of me!I couldn’t find the possible time complexity at the first time.Just look at the data range, $n&lt;1500$, $q&lt;200000$.Obviously, $O(nq)$ is impossible, but I thought about">
+    <meta name="description" content="[[DP]] link How stupid of me! I couldn&#39;t find the possible time complexity at the first time. Just look at the data range, \(n&lt;1500\), \(q&lt;200000\). Obviously, \(O(nq)\) is impossible, but I th">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CF814C">
 <meta property="og:url" content="http://example.com/2022/05/30/CF814C/index.html">
 <meta property="og:site_name" content="_WD_&#39;s blog">
-<meta property="og:description" content="[[DP]]link How stupid of me!I couldn’t find the possible time complexity at the first time.Just look at the data range, $n&lt;1500$, $q&lt;200000$.Obviously, $O(nq)$ is impossible, but I thought about">
+<meta property="og:description" content="[[DP]] link How stupid of me! I couldn&#39;t find the possible time complexity at the first time. Just look at the data range, \(n&lt;1500\), \(q&lt;200000\). Obviously, \(O(nq)\) is impossible, but I th">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-29T16:12:37.431Z">
 <meta property="article:modified_time" content="2022-05-29T17:31:50.842Z">
@@ -217,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          930 words
+          940 words
         
       </span>
     
@@ -270,14 +270,13 @@
             
             <div class="markdown-body">
               
-              <p>[[DP]]<br><a target="_blank" rel="noopener" href="https://codeforces.com/contest/814/problem/C">link</a></p>
-<p>How stupid of me!<br>I couldn’t find the possible time complexity at the first time.<br>Just look at the data range, $n&lt;1500$, $q&lt;200000$.<br>Obviously, $O(nq)$ is impossible, but I thought about it for a long time.</p>
-<p>Maybe $O(n^2+q)$?</p>
+              <p>[[DP]] <a target="_blank" rel="noopener" href="https://codeforces.com/contest/814/problem/C">link</a></p>
+<p>How stupid of me! I couldn't find the possible time complexity at the first time. Just look at the data range, <span class="math inline">\(n&lt;1500\)</span>, <span class="math inline">\(q&lt;200000\)</span>. Obviously, <span class="math inline">\(O(nq)\)</span> is impossible, but I thought about it for a long time.</p>
+<p>Maybe <span class="math inline">\(O(n^2+q)\)</span>?</p>
 <p>We need O(1) query, so we must store every possible query.</p>
 <p>Use DP(dynamic programming).</p>
-<p>Optimizing to 2D (without $|\Sigma|$) is possible, but not necessary.</p>
+<p>Optimizing to 2D (without <span class="math inline">\(|\Sigma|\)</span>) is possible, but not necessary.</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> n,q,ans[<span class="hljs-number">26</span>][<span class="hljs-number">2003</span>],cost[<span class="hljs-number">26</span>],x;<br><span class="hljs-type">char</span> o[<span class="hljs-number">2003</span>],c;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	cin&gt;&gt;n&gt;&gt;o+<span class="hljs-number">1</span>&gt;&gt;q;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>		<span class="hljs-built_in">memset</span>(cost,<span class="hljs-number">0</span>,<span class="hljs-keyword">sizeof</span> cost);<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j=i;j&lt;=n;j++)&#123;<br>			<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> k=<span class="hljs-number">0</span>;k&lt;<span class="hljs-number">26</span>;k++)&#123;<br>				<span class="hljs-keyword">if</span>(k==o[j]-<span class="hljs-string">&#x27;a&#x27;</span>)cost[k]++;<br>				ans[k][j-i+<span class="hljs-number">1</span>-cost[k]]=<span class="hljs-built_in">max</span>(j-i+<span class="hljs-number">1</span>,ans[k][j-i+<span class="hljs-number">1</span>-cost[k]]);<br>			&#125;<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> x=<span class="hljs-number">0</span>;x&lt;<span class="hljs-number">26</span>;x++)&#123;<br>		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)&#123;<br>			ans[x][i]=<span class="hljs-built_in">max</span>(ans[x][i],ans[x][i<span class="hljs-number">-1</span>]);<br>		&#125;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(;q--;cin&gt;&gt;x&gt;&gt;c,<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans[c-<span class="hljs-string">&#x27;a&#x27;</span>][x]));<br>&#125;<br></code></pre></td></tr></table></figure>
-
 
               
             </div>
