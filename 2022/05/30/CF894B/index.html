@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="[[math]]link First, it’s obvious that the numbers put can be only 1 or -1. If k equals to -1 and the parity of n and m differ, the answer is obviously 0.  Assume that $n$ is even and $m$ is even, the">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/05/30/CF894B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[[math]]link First, it’s obvious that the numbers put can be only 1 or -1. If k equals to -1 and the parity of n and m differ, the answer is obviously 0.  Assume that $n$ is even and $m$ is even, the">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-29T16:12:37.443Z">
+<meta property="article:modified_time" content="2022-05-23T15:05:02.490Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-CF894B" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/30/CF894B/" class="article-date">
+  <time class="dt-published" datetime="2022-05-29T16:12:37.443Z" itemprop="datePublished">2022-05-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[[math]]<br><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/894/B">link</a></p>
+<p>First, it’s obvious that the numbers put can be only 1 or -1.</p>
+<p>If k equals to -1 and the parity of n and m differ, the answer is obviously 0.</p>
+<blockquote>
+<p>Assume that $n$ is even and $m$ is even, the count of -1 equals to $n<em>odd$ (even) and $m</em>odd$ (odd), and it is impassible to be odd and even at the same time.</p>
+</blockquote>
+<p>Otherwise, for the first n-1 lines and the first m-1 columns, we can put either 1 or -1 in it,<br>and there’re $2^{(n - 1) * (m-1)}$ ways in total.</p>
+<p> Then it’s obvious that the remaining numbers are uniquely determined because the product of each row and each column is known already.</p>
+<p>So in this case the answer is $2^{(n - 1) * (m-1)}$ .</p>
+<p>We can use fast power, which is easy.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line"><span class="type">const</span> ll mod=<span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line">ll n,m,ret;</span><br><span class="line"><span class="type">int</span> k;</span><br><span class="line"><span class="function">ll <span class="title">fp</span><span class="params">(ll x,ll a)</span></span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(ret=<span class="number">1</span>;a;a&gt;&gt;=<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(a&amp;<span class="number">1</span>)(ret*=x)%=mod;</span><br><span class="line">		(x*=x)%=mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld%d&quot;</span>,&amp;n,&amp;m,&amp;k);</span><br><span class="line">	<span class="keyword">if</span>(!~k&amp;&amp;(n&amp;<span class="number">1</span>)!=(m&amp;<span class="number">1</span>))<span class="built_in">printf</span>(<span class="string">&quot;0&quot;</span>),<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld&quot;</span>,<span class="built_in">fp</span>(<span class="built_in">fp</span>(<span class="number">2</span>,n<span class="number">-1</span>),m<span class="number">-1</span>));</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>(If the code is very long, I’ll leave a link.)</p>
+<p>2022.3.28</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/30/CF894B/" data-id="cl3ri3l39000m1cw25tuigflz" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/30/CF959D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/30/CF869D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/30/%E6%9C%AA%E5%91%BD%E5%90%8D/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/30/P5121/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/30/CF1662N/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/30/CF1662L/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/30/CF1662I/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

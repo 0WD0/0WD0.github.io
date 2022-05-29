@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="[[DP]] [[conversion]]link Tutorial on CFLet $x_i:&#x3D;vt_i−a_i$ and $y_i:&#x3D;vt_i+a_i$ for $i&#x3D;1,…,n$. The main observation to solve this problem is that a sequence of kicks with indices $i_1,…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2022/05/30/CF1662L/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="[[DP]] [[conversion]]link Tutorial on CFLet $x_i:&#x3D;vt_i−a_i$ and $y_i:&#x3D;vt_i+a_i$ for $i&#x3D;1,…,n$. The main observation to solve this problem is that a sequence of kicks with indices $i_1,…">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-29T16:12:37.462Z">
+<meta property="article:modified_time" content="2022-05-23T15:06:24.540Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-CF1662L" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/05/30/CF1662L/" class="article-date">
+  <time class="dt-published" datetime="2022-05-29T16:12:37.462Z" itemprop="datePublished">2022-05-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[[DP]] [[conversion]]<br><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1662/L">link</a></p>
+<h2 id="Tutorial-on-CF"><a href="#Tutorial-on-CF" class="headerlink" title="Tutorial on CF"></a>Tutorial on CF</h2><p>Let $x_i:&#x3D;vt_i−a_i$ and $y_i:&#x3D;vt_i+a_i$ for $i&#x3D;1,…,n$. The main observation to solve this problem is that a sequence of kicks with indices $i_1,…,i_k$ can be seen (in this order and starting from the first one) if and only if both sequences $x_{i_1},…,x_{i_k}$ and $y_{i_1},…,y_{i_k}$ are nondecreasing. To see this, observe that<br>$$<br>x_i≤x_j⟺vt_i−a_i≤vt_j−a_j⟺a_j−a_i≤v(t_j−t_i)<br>$$</p>
+<p>and<br>$$<br>y_i≤y_j⟺vt_i+a_i≤vt_j+a_j⟺a_i−a_j≤v(t_j−t_i)<br>$$<br>Moreover<br>$$<br>t_i&#x3D;\frac{x_i+y_i}{2v}<br>$$<br>so if both sequences are nondecreasing, then their corresponding times are in increasing order and it holds that $|a_{i_ℓ}+1−a_{i_ℓ}|≤v(t_{i_ℓ}+1−t_{i_ℓ})$, which means that each event can be reached from the previous one. The converse is clear from the previous inequalities.</p>
+<p>In order to impose the condition that the events can be reached starting from position 00 at time 00, it is enough to remove all points which cannot be reached from the origin, that is, with $|ai|&gt;vti$. We will assume that these events have been eliminated and still denote by $n$ the total number of events.</p>
+<p>We have thus reduced the problem to finding the longest increasing subsequence of the $y$-values when ordered by increasing xx-value. More precisely, let $(p_1,…,p_n)$ be the permutation of $(1,…,n)$ such that</p>
+<p>$i&lt;j⟹x_{p_i}&lt;x_{p_j}\ \text{or}\ (x_{p_i}&#x3D;x_{p_j}\ \text{and}\ y_{p_i}&lt;y_{p_j})$.</p>
+<p>Then the solution of the problem is the length of the longest (non-strictly) increasing subsequence of the list $y_{p_1},…,y_{p_n}$.</p>
+<p>There are classical algorithms to solve this efficiently in $O(n\log n)$ time. For instance, this complexity is achieved by an approach that processes the elements from left to right and uses binary searches to update the value of the smallest possible last element of a length-$k$ increasing subsequence in every prefix for every $k$.</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">200005</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="type">long</span> <span class="type">long</span> ll;</span><br><span class="line">ll t[N],a[N],n,v,nn;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span>&#123;ll x,y;&#125;_[N];</span><br><span class="line">ll dp[N],u;</span><br><span class="line"><span class="type">int</span> top;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%lld%lld&quot;</span>,&amp;n,&amp;v);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;t[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">scanf</span>(<span class="string">&quot;%lld&quot;</span>,&amp;a[i]);</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="keyword">if</span>(<span class="built_in">abs</span>(a[i])&lt;=v*t[i])_[++nn]=&#123;t[i]*v+a[i],t[i]*v-a[i]&#125;;n=nn;</span><br><span class="line">	<span class="built_in">sort</span>(_+<span class="number">1</span>,_+<span class="number">1</span>+n,[](A a,A b)&#123;<span class="keyword">return</span> a.x&lt;b.x||(a.x==b.x&amp;&amp;a.y&lt;b.y);&#125;);<span class="comment">//lambda</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>((u=_[i].y)&gt;=dp[top])dp[++top]=u;</span><br><span class="line">		<span class="keyword">else</span> dp[<span class="built_in">upper_bound</span>(dp+<span class="number">1</span>,dp+<span class="number">1</span>+top,u)-dp]=u;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,top);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/05/30/CF1662L/" data-id="cl3ri3l2s00041cw2gcalfrqb" data-title="" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/05/30/CF1662N/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/05/30/CF1662I/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/05/">May 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/05/30/%E6%9C%AA%E5%91%BD%E5%90%8D/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/30/P5121/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/30/CF1662N/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/30/CF1662L/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2022/05/30/CF1662I/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
