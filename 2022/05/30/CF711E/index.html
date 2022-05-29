@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="_WD_">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="[[math]] [[combinatorics]] [[inverse_element]]link The tutorial on CFNote that MOD&#x3D;10^6^+3 is a prime. Firstly, if we have $k &gt; 2^n$, then by pigeonhole principle(鸽笼原理) we must have 2 people w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="_WD_&#39;s blog">
+<meta property="og:url" content="http://example.com/2022/05/30/CF711E/index.html">
+<meta property="og:site_name" content="_WD_&#39;s blog">
+<meta property="og:description" content="[[math]] [[combinatorics]] [[inverse_element]]link The tutorial on CFNote that MOD&#x3D;10^6^+3 is a prime. Firstly, if we have $k &gt; 2^n$, then by pigeonhole principle(鸽笼原理) we must have 2 people w">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-29T16:12:37.419Z">
+<meta property="article:modified_time" content="2022-05-23T15:04:05.097Z">
+<meta property="article:author" content="_WD_">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>_WD_&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.0","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="_WD_'s blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text=""></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-05-30 00:12" pubdate>
+          May 30, 2022 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.9k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          41 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              
+              <p>[[math]] [[combinatorics]] [[inverse_element]]<br><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/711/E">link</a></p>
+<h2 id="The-tutorial-on-CF"><a href="#The-tutorial-on-CF" class="headerlink" title="The tutorial on CF"></a>The tutorial on CF</h2><p>Note that <em>MOD</em>&#x3D;10^6^+3 is a prime.</p>
+<p>Firstly, if we have $k &gt; 2^n$, then by pigeonhole principle(鸽笼原理) we must have 2 people with the same birthday. Thus, we can directly output 1 1.</p>
+<p>Thus, now we suppose $k \le 2^n$. Then, instead of computing the probability directly, we compute the complement, i.e. the probability that all the people have distinct birthdays. This probability <code>turns out</code> to be much simpler to calculate, as it is just &#x3D;&#x3D;$\frac{(2^n-1)*(2^n-2)…(2^n-(k-1))}{2^{(k-1)n}}$&#x3D;&#x3D;. (Fix the birthday of the first person, the probability that the second person has different birthday is $\frac{2^n-1}{2^n}$, and for the next person it’s $\frac{2^n-2}{2^n}$ and so on.)</p>
+<p>Now, we know that the denominator is just a power of 2. However, we still have to reduce the fraction to the lowest terms. Note that $\frac{a}{b}$ is in the lowest terms if and only if $1-\frac{a}{b}&#x3D;\frac{b-a}{b}$ is in the lowest terms,since $gcd(a,b)&#x3D;gcd(b-a,b)$ . Also, note that the gcd is a power of 2 since the denominator is a power of 2. Thus, we need to find the highest power of 2 that divides (2<em>n</em> - 1)(2<em>n</em> - 2)…(2<em>n</em> - (<em>k</em> - 1)). This is also equal to the sum of the highest power of 2 that divides 2n-1, 2n-2, …, 2n-(k-1).</p>
+<p>Now, &#x3D;&#x3D;if a power of 2 divides <em>x</em> &lt; 2^n^, then it must also divides 2^n^ - <em>x</em> and vice versa.&#x3D;&#x3D; So, we can actually translate this to finding the sum of highest power of 2 that divides 1, 2, …, <em>k</em> - 1, or the highest power of 2 that divides (<em>k</em> - 1)! . Now, this is simple to calculate by Legendre’s formula (which is quite easy to prove) in $O(log k)$.</p>
+<p>Now that we find the gcd of the numerator and denominator, we can immediately find the reduced denominator by binary exponentiation. For the numerator, we need a bit more work, since we have to deal with (2<em>n</em> - 1)(2<em>n</em> - 2)…(2<em>n</em> - (<em>k</em> - 1)). However, it is not hard either. The key fact is that <em>MOD</em> is small, so if <em>k</em> - 1 ≥ <em>MOD</em>, the product above is equal to 0 modulo <em>MOD</em>, because among <em>MOD</em> consecutive integers there must be one that is a multiple of <em>MOD</em>. Thus, the above product can be calculated in <em>O</em>(<em>MOD</em>) if <em>k</em> - 1 ≤ <em>MOD</em> and <em>O</em>(1) otherwise. The remaining parts can be calculated using direct binary exponentiation.</p>
+<p>One minor note is that when we’re calculating 2(<em>k</em> - 1)<em>n</em>, the value of (<em>k</em> - 1)<em>n</em> might overflow. One way to resolve this is to reduce it modulo <em>MOD</em> - 1, since 2^MOD-1^ ≡ 1 modulo <em>MOD</em> by Fermat’s Little Theorem. Another way is to just evaluate 2^k-1^ first, then take the result and raise it to the <em>n</em>-th power.</p>
+<p>Time Complexity : $O(MOD+logk+logn)$</p>
+<h2 id="Some-discoveries"><a href="#Some-discoveries" class="headerlink" title="Some discoveries"></a>Some discoveries</h2><p>The highest power of 2 that divides $n!$ is equal to n subtract the number of 1 in binary form of n.</p>
+<h3 id="Legendre’s-formula"><a href="#Legendre’s-formula" class="headerlink" title="Legendre’s formula:"></a>Legendre’s formula:</h3><p>在正数n!的素因子标准分解式中，素数p的最高指数<br>$$<br>L_p(n!)&#x3D;\Sigma_{k\ge1}\lfloor\frac{n}{p^k}\rfloor<br>$$</p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><br><span class="hljs-meta">#<span class="hljs-keyword">include</span>#<span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-keyword">typedef</span> <span class="hljs-type">long</span> <span class="hljs-type">long</span> ll;<br>ll n,k;<br>ll a,a1,a2,cnt;<br><span class="hljs-type">const</span> ll mod=<span class="hljs-number">1000003</span>;<br>ll res;<br><span class="hljs-function">ll <span class="hljs-title">fpw</span><span class="hljs-params">(ll x,ll a)</span></span>&#123;<br>	<span class="hljs-keyword">for</span>(res=<span class="hljs-number">1</span>;a;a&gt;&gt;=<span class="hljs-number">1</span>,(x*=x)%=mod)<span class="hljs-keyword">if</span>(a&amp;<span class="hljs-number">1</span>)(res*=x)%=mod;<br>	<span class="hljs-keyword">return</span> res;<br>&#125;<br>ll den,num;<span class="hljs-comment">//denominator and numerator</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	<span class="hljs-type">int</span> i;<br>	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld%lld&quot;</span>,&amp;n,&amp;k);<br>	<span class="hljs-keyword">for</span>(a=k<span class="hljs-number">-1</span>;a;a&gt;&gt;=<span class="hljs-number">1</span>)cnt++;<br>	<span class="hljs-keyword">if</span>(n&lt;cnt)&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;1 1&quot;</span>);<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>	&#125;<br>	<span class="hljs-keyword">for</span>(a=cnt=k<span class="hljs-number">-1</span>;a;a&gt;&gt;=<span class="hljs-number">1</span>)<span class="hljs-keyword">if</span>(<span class="hljs-number">1</span>&amp;a)cnt--;<br>	den=<span class="hljs-built_in">fpw</span>(<span class="hljs-built_in">fpw</span>(<span class="hljs-number">2</span>,k<span class="hljs-number">-1</span>),n)*<span class="hljs-built_in">fpw</span>(<span class="hljs-built_in">fpw</span>(<span class="hljs-number">2</span>,mod<span class="hljs-number">-2</span>),cnt)%mod;<br>	<span class="hljs-keyword">if</span>(k<span class="hljs-number">-1</span>&gt;=mod)num=den;<br>	<span class="hljs-keyword">else</span>&#123;<br>		<span class="hljs-keyword">for</span>(a=<span class="hljs-built_in">fpw</span>(<span class="hljs-number">2</span>,n),i=num=<span class="hljs-number">1</span>;i&lt;=k<span class="hljs-number">-1</span>;i++)num=(a-i+mod)%mod*num%mod;<br>		num=num*<span class="hljs-built_in">fpw</span>(<span class="hljs-built_in">fpw</span>(<span class="hljs-number">2</span>,mod<span class="hljs-number">-2</span>),cnt)%mod;<br>		num=den-num&lt;<span class="hljs-number">0</span>?(mod-num+den)%mod:den-num;<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld %lld&quot;</span>,num,den);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="Techniques"><a href="#Techniques" class="headerlink" title="Techniques"></a>Techniques</h1><h2 id="Inverse-element"><a href="#Inverse-element" class="headerlink" title="Inverse element"></a>Inverse element</h2><h3 id="Way1"><a href="#Way1" class="headerlink" title="Way1"></a>Way1</h3><blockquote>
+<h3 id="Fermat’s-little-theorem"><a href="#Fermat’s-little-theorem" class="headerlink" title="Fermat’s little theorem"></a>Fermat’s little theorem</h3><p>$p$ is a prime, and $a$ isn’t a multiple of $p$, then<br>$$<br>a^{p-1}\equiv1 \pmod p<br>$$</p>
+</blockquote>
+<p>We can <code>deduce</code> from this that<br>$$<br>Inv_a&#x3D;a^{p-2}%p<br>$$</p>
+<p>Using this, we can compute a inverse element of $a$ by &#x3D;&#x3D;fast power&#x3D;&#x3D; with modulo in $O(\log p)$</p>
+<h3 id="Way2"><a href="#Way2" class="headerlink" title="Way2"></a>Way2</h3><p>Regard this congruence equation<br>$$<br>Inv_a<em>a\equiv1 \pmod p<br>$$<br>as another equation ($x&#x3D;Inv, b&#x3D;p$)<br>$$<br>a</em>Inv_a+p*any&#x3D;1<br>$$<br>then the only thing we need to do is that find a possible solution of the equation.</p>
+<p>And, coincidentally, there is an algorithm <code>dedicated to</code> this kind of problem.</p>
+<blockquote>
+<h3 id="Exgcd"><a href="#Exgcd" class="headerlink" title="Exgcd"></a>Exgcd</h3><p>Quite evidently, $a$ and $p$ are coprime(according to Bézout’s identity which also called Bézout’s lemma),</p>
+<p>and this algorithm is based on Euclid’s algorithm.<br>$$<br>\begin{align}<br>Final\ state:&amp;1<em>1+0</em>0&#x3D;1\ \ \ \text{i.e.}\ \ \ a&#x3D;1,b&#x3D;0,x&#x3D;1,y&#x3D;0\<br>Transfer:&amp;1&#x3D;a<em>x_0+b</em>y_0&#x3D;b<em>x_1+a%b</em>y_1&#x3D;b<em>x_1+(a-\lfloor\frac{a}{b}\rfloor</em>b)<em>y_1\<br>&amp;&#x3D;a</em>y_1+b*(x_1-\lfloor\frac{a}{b}\rfloor<em>y_1)\<br>That\ is:&amp;x_0\gets y_1\ \text{and}\ y_0\gets x_1-\lfloor\frac{a}{b}\rfloor</em>y_1<br>\end{align}<br>$$<br><strong>Code:</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp">&gt;<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">exgcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a,<span class="hljs-type">int</span> b,<span class="hljs-type">int</span>&amp;x,<span class="hljs-type">int</span>&amp;y)</span></span>&#123;b?<span class="hljs-built_in">exgcd</span>(b,a%b,y,x),y-=a/b*x:(x=<span class="hljs-number">1</span>,y=<span class="hljs-number">0</span>);&#125;<br>&gt;<span class="hljs-built_in">exgcd</span>(a,p,inv,x);<br>&gt;(inv+=p)%=p;<br></code></pre></td></tr></table></figure>
+<p>Must use recursive form.</p>
+<p>By the way, there is a small optimization of gcd here.</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs gcode">&gt;<span class="hljs-keyword">while</span><span class="hljs-comment">(b^=a^=b^=a%=b)</span>;<br></code></pre></td></tr></table></figure>
+<p>than, a&#x3D;gcd(a,b);</p>
+</blockquote>
+<h3 id="Way3"><a href="#Way3" class="headerlink" title="Way3"></a>Way3</h3><p>$$<br>\begin{align}<br>&amp;p&#x3D;\lfloor\frac{p}{a}\rfloor<em>a+p%a\<br>\iff&amp;\lfloor\frac{p}{a}\rfloor</em>a\equiv-p%a\pmod p\<br>\iff&amp;a^{-1}\equiv(-p%a)^{-1}<em>\lfloor\frac{p}{a}\rfloor\equiv-\lfloor\frac{p}{a}\rfloor</em>(p%a)^{-1}\equiv(p-\lfloor\frac{p}{a}\rfloor)*(p%a)^{-1}\pmod p<br>\end{align}<br>$$</p>
+<p>Since limited that $Inv$ must be positive, we must plus a $p$ before $-\lfloor\frac{p}{a}\rfloor$.</p>
+<p>Therefore, we can deduce $Inv_a$ from $Inv_{p-p&#x2F;a}$.</p>
+<p>By this way, we can calculate the inverse elements from 1~n in linear time.</p>
+<p><strong>Code：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">for</span>(inv[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>,i=<span class="hljs-number">2</span>;i&lt;p;i++)inv[i]=inv[p%i]*(p-p/i)%p;<br></code></pre></td></tr></table></figure>
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div></div>
+      <div>http://example.com/2022/05/30/CF711E/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>_WD_</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 30, 2022</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/30/CF761C/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/30/CF596E/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
